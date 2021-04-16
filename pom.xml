@@ -116,6 +116,7 @@
         <elasticsearch.version>7.6.0</elasticsearch.version>
         <enunciate.version>2.11.1</enunciate.version>
         <findbugs.plugin.version>3.0.5</findbugs.plugin.version>
+        <frontend.maven.plugin.version>1.11.3</frontend.maven.plugin.version>
         <google.guava.version>27.0-jre</google.guava.version>
         <googlecode.log4jdbc.version>1.2</googlecode.log4jdbc.version>
         <gson.version>2.2.4</gson.version>
