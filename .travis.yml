@@ -35,11 +35,11 @@ jobs:
     - name: Linux AMD64 OpenJDK11
       env: JDK_VERSION=11
     - name: Linux ARM64 OpenJDK11
-        arch: arm64-graviton2
-        dist: focal
-        virt: lxd
-        group: edge
-        env: JDK_VERSION=11
+      arch: arm64-graviton2
+      dist: focal
+      virt: lxd
+      group: edge
+      env: JDK_VERSION=11
 
 before_install:
   - export MAVEN_OPTS="-Xmx1200M -XX:MaxPermSize=768m -Xms512m"
