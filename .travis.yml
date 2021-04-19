@@ -23,17 +23,18 @@ cache:
   - $HOME/.m2
 
 env:
-  - KEY=default VALUE=default
+  global:
+    - KEY=default VALUE=default
   
 # Environment to testing with different versions, disabled because ranger is not compatible
 #  - KEY=hadoop.version VALUE=2.8.0
 
 jobs:
   include:
-    - name: Linux AMD64 OpenJDK8
-      env: JDK_VERSION=8
-    - name: Linux AMD64 OpenJDK11
-      env: JDK_VERSION=11
+#    - name: Linux AMD64 OpenJDK8
+#      env: JDK_VERSION=8
+#    - name: Linux AMD64 OpenJDK11
+#      env: JDK_VERSION=11
     - name: Linux ARM64 OpenJDK11
       arch: arm64-graviton2
       dist: focal
