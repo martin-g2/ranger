@@ -55,5 +55,5 @@ script:
   - mvn test -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl !plugin-kafka,!ugsync,!hive-agent
   - mvn test -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl plugin-kafka -Dtest="*,!KafkaRangerAuthorizerGSSTest"
   - mvn test -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl ugsync -Dtest="*,!TestLdapUserGroup"
-  - if [[ "$TRAVIS_JDK_VERSION" != "openjdk8" ]]; then mvn test -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl hive-agent -Dtest="*,!HIVERangerAuthorizerTest" -DfailIfNoTests=false ; fi
-  - if [[ "$TRAVIS_JDK_VERSION" == "openjdk8" ]]; then mvn test -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl hive-agent ; fi
+  - if [[ "$JDK_VERSION" != "8" ]]; then mvn test -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl hive-agent -Dtest="*,!HIVERangerAuthorizerTest" -DfailIfNoTests=false ; fi
+  - if [[ "$JDK_VERSION" == "8" ]]; then mvn test -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl hive-agent ; fi
