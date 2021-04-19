@@ -40,7 +40,9 @@ jobs:
       dist: focal
       virt: lxd
       group: edge
-      env: JDK_VERSION=11
+      env: 
+        - JDK_VERSION=11 
+        - MAVEN_ARGS="-DskipJSTests=true -P!all"
 
 before_install:
   - export MAVEN_OPTS="-Xmx1200M -XX:MaxPermSize=768m -Xms512m"
@@ -48,12 +50,12 @@ before_install:
   - sudo apt install openjdk-${JDK_VERSION}-jdk maven
 
 install:
-  - mvn install -D$KEY=$VALUE -DskipTests -Dmaven.javadoc.skip=true --no-transfer-progress -B -V
+  - mvn install $MAVEN_ARGS -D$KEY=$VALUE -DskipTests -Dmaven.javadoc.skip=true --no-transfer-progress -B -V
 
 # KafkaRangerAuthorizerGSSTest is a failing test, TestLdapUserGroup needs too much memory for travis
 script:
-  - mvn test -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl !plugin-kafka,!ugsync,!hive-agent
-  - mvn test -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl plugin-kafka -Dtest="*,!KafkaRangerAuthorizerGSSTest"
-  - mvn test -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl ugsync -Dtest="*,!TestLdapUserGroup"
-  - if [[ "$JDK_VERSION" != "8" ]]; then mvn test -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl hive-agent -Dtest="*,!HIVERangerAuthorizerTest" -DfailIfNoTests=false ; fi
-  - if [[ "$JDK_VERSION" == "8" ]]; then mvn test -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl hive-agent ; fi
+  - mvn test $MAVEN_ARGS -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl !plugin-kafka,!ugsync,!hive-agent
+  - mvn test $MAVEN_ARGS -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl plugin-kafka -Dtest="*,!KafkaRangerAuthorizerGSSTest"
+  - mvn test $MAVEN_ARGS -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl ugsync -Dtest="*,!TestLdapUserGroup"
+  - if [[ "$JDK_VERSION" != "8" ]]; then mvn test $MAVEN_ARGS -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl hive-agent -Dtest="*,!HIVERangerAuthorizerTest" -DfailIfNoTests=false ; fi
+  - if [[ "$JDK_VERSION" == "8" ]]; then mvn test $MAVEN_ARGS -D$KEY=$VALUE -Dmaven.javadoc.skip=true -B -V -pl hive-agent ; fi
