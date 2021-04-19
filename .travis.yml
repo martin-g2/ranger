@@ -44,7 +44,7 @@ jobs:
 before_install:
   - export MAVEN_OPTS="-Xmx1200M -XX:MaxPermSize=768m -Xms512m"
   - sudo apt update -y
-  - sudo apt install openjdk-${JDK_VERSION} maven
+  - sudo apt install openjdk-${JDK_VERSION}-jdk maven
 
 install:
   - mvn verify -D$KEY=$VALUE -DskipTests -Dmaven.javadoc.skip=true -B -V
